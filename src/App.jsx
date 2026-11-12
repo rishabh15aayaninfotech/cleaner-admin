@@ -7,22 +7,22 @@ import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {
   const [authenticated, setAuthenticated] = useState(
-    () => localStorage.getItem("cleaner-auth") === "true",
+    () => localStorage.getItem("auth") === "true",
   );
   const login = (result) => {
-    localStorage.setItem("cleaner-auth", "true");
-    localStorage.setItem("cleaner-token", result.token);
-    localStorage.setItem("cleaner-refresh-token", result.refreshToken || "");
+    localStorage.setItem("auth", "true");
+    localStorage.setItem("auth-token", result.token);
+    localStorage.setItem("refresh-token", result.refreshToken || "");
     const safeUser = { ...(result.data || {}) };
     delete safeUser.password;
-    localStorage.setItem("cleaner-user", JSON.stringify(safeUser));
+    localStorage.setItem("user", JSON.stringify(safeUser));
     setAuthenticated(true);
   };
   const logout = () => {
-    localStorage.removeItem("cleaner-auth");
-    localStorage.removeItem("cleaner-token");
-    localStorage.removeItem("cleaner-refresh-token");
-    localStorage.removeItem("cleaner-user");
+    localStorage.removeItem("auth");
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("refresh-token");
+    localStorage.removeItem("user");
     setAuthenticated(false);
   };
   return (

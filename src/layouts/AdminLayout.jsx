@@ -18,12 +18,12 @@ export default function AdminLayout({ onLogout }) {
   const [open, setOpen] = useState(false),
     [collapsed, setCollapsed] = useState(false),
     [dark, setDark] = useState(
-      () => localStorage.getItem("cleaner-theme") === "dark",
+      () => localStorage.getItem("theme") === "dark",
     ),
     location = useLocation();
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
-    localStorage.setItem("cleaner-theme", dark ? "dark" : "light");
+      localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
   const title = titles[location.pathname.slice(1)] || "Dashboard";
   return (
