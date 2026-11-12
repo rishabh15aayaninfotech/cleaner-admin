@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { getAdminProfile } from "../lib/api";
+import LogoLoader from "../components/LogoLoader";
 const titles = {
   dashboard: "Dashboard",
   jobSchedulingManagement: "Job Management",
@@ -23,6 +24,7 @@ export default function AdminLayout({ onLogout }) {
     ),
     location = useLocation();
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  const [loading, setLoading] = useState(true);
   useEffect(() => { if (user._id) getAdminProfile(user._id).then((result) => { if (result?.data) { const safeUser = { ...result.data }; delete safeUser.password; localStorage.setItem("user", JSON.stringify(safeUser)); setUser(safeUser); } }).catch(() => {}); }, [user._id]);
   const readableRole = typeof user.role === "object" ? user.role.role : /^[a-f\d]{24}$/i.test(user.role || "") ? "Admin" : user.role;
   const displayUser = { ...user, initials: (user.name || "Admin").split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase(), role: readableRole, imageUrl: user.profilePicture?.[0]?.url || (user.profilePicture?.[0]?.filename ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, "")}/${user.profilePicture[0].filename}` : "") };
@@ -31,8 +33,14 @@ export default function AdminLayout({ onLogout }) {
       localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
   const title = titles[location.pathname.slice(1)] || "Dashboard";
+  useEffect(() => {
+    setLoading(true);
+    const timer = window.setTimeout(() => setLoading(false), 550);
+    return () => window.clearTimeout(timer);
+  }, [location.pathname]);
   return (
     <div className="app-shell">
+      {loading && <LogoLoader />}
       <Sidebar
         open={open}
         collapsed={collapsed}
