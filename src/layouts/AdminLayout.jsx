@@ -48,3 +48,4 @@ export default function AdminLayout({ onLogout }) {
     </div>
   );
 }
+
