@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
-import { apiRequest, getEmployees } from '../lib/api'
+import { apiRequest, getEmployees, getEstimates } from '../lib/api'
 import HolidayCalendar from './HolidayCalendar'
 
 const fallbackEvents=[['Event 01','Job','J-00176','11/07/2026','09:00 AM - 10:30 AM','Rishabh Sharma'],['Appointment','Job','J-00175','11/08/2026','02:00 PM - 03:00 PM','Rishabh Sharma']]
 const fallbackEmployees=[['John Smith','john@example.com','444-555-1212','On Leave','Active'],['Rishabh Sharma','rishabh@example.com','900-222-8281','Working','Active'],['Sarah Williams','sarah@example.com','453-551-5131','Working','Active']]
-const estimates=[['J-00176','John smith','987-290-3196','$2,000.00'],['J-00175','client crm','904-101-7927','$241,750.00'],['J-00174','client crm','904-101-7927','$92,280.00']]
+const fallbackEstimates=[['J-00176','John smith','987-290-3196','$2,000.00'],['J-00175','client crm','904-101-7927','$241,750.00'],['J-00174','client crm','904-101-7927','$92,280.00']]
 const Head=({title,action,filter,onFilter})=><div className="reference-card-head"><h3>{title}</h3><div>{onFilter&&<label className="event-filter">Filter by Event Type:<select value={filter} onChange={e=>onFilter(e.target.value)}><option>All</option><option>Job</option><option>Employee</option><option>Holiday</option><option>Office</option></select></label>}{action&&<button className="small-action">{action}</button>}</div></div>
 const eventRows=result=>(result?.data||[]).slice(0,10).map(event=>[event.title||'Untitled event',event.eventType||'—',event.jobId||'—',event.date?new Date(event.date).toLocaleDateString('en-GB'):'—',`${event.startTime||'—'} - ${event.endTime||'—'}`,event.employeeId?.employee_name||'Unassigned'])
 
 export default function DashboardSections(){
  const adminId=JSON.parse(localStorage.getItem('user')||'{}')._id
- const [events,setEvents]=useState(fallbackEvents),[employees,setEmployees]=useState(fallbackEmployees),[eventFilter,setEventFilter]=useState('All'),[eventsPage,setEventsPage]=useState(1),[employeesPage,setEmployeesPage]=useState(1),[limit]=useState(5)
+ const [events,setEvents]=useState(fallbackEvents),[employees,setEmployees]=useState(fallbackEmployees),[estimates,setEstimates]=useState(fallbackEstimates),[eventFilter,setEventFilter]=useState('All'),[eventsPage,setEventsPage]=useState(1),[employeesPage,setEmployeesPage]=useState(1),[limit]=useState(5)
  useEffect(()=>{if(!adminId)return;const query=new URLSearchParams({page:String(eventsPage),limit:String(limit)});if(eventFilter!=='All')query.set('eventType',eventFilter);apiRequest(`/event/${adminId}?${query.toString()}`).then(result=>setEvents(eventRows(result))).catch(()=>{})},[adminId,eventsPage,limit,eventFilter])
  useEffect(()=>{if(adminId)getEmployees(adminId,employeesPage,limit).then(result=>setEmployees((result?.data||[]).map(employee=>[employee.employee_name||'Unnamed',employee.employee_email||'—',employee.employee_contact||'—',employee.employee_workingStatus||'—',employee.employee_employeeStatus||'—']))).catch(()=>{})},[adminId,employeesPage,limit])
+ useEffect(()=>{if(adminId)getEstimates(adminId,limit).then(result=>setEstimates((result?.data||[]).slice(0,5).map(estimate=>{const job=estimate.jobDetails||{};return [job.jobId||'—',job.clientName||'—',job.clientContact||'—',Number(estimate.totalEstimate??0).toLocaleString('en-US',{style:'currency',currency:'USD'}),job.serviceAddress||'—',estimate.status||'Pending']}))).catch(()=>{})},[adminId,limit])
  const changeFilter=filter=>{setEventFilter(filter);setEventsPage(1)}
  return <div className="reference-sections"><HolidayCalendar/>
   <section className="panel calendar-card"><Head title="Calendar" action="Toggle Weekends"/><div className="calendar-toolbar"><button>‹</button><strong>November 2026</strong><button>›</button></div><div className="calendar-grid">{['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day=><b key={day}>{day}</b>)}{Array.from({length:35},(_,i)=><div key={i}><small>{i<3?i+27:i-2}</small>{i===10&&<em>Inventory Day</em>}{i===25&&<em>Thanksgiving Day</em>}{i%7===1&&<i>• Team task</i>}</div>)}</div></section>

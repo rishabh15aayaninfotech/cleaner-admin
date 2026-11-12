@@ -12,7 +12,14 @@ export function getAdminProfile(adminId) {
 
 export async function getEmployees(adminId, page = 1, limit = 5) {
   const token = localStorage.getItem('auth-token')
-  const response = await fetch(`${API_BASE_URL}/employee/get-all-employees/${adminId}?page=${page}&limit=${limit}`, { headers: { Accept: 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) } })
+  const response = await fetch(`${API_BASE_URL}/employee/get-all-employees/${adminId}`, { headers: { Accept: 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) } })
   if (!response.ok) throw new Error(`Employee API request failed: ${response.status}`)
+  return response.json()
+}
+
+export async function getEstimates(adminId, limit = 5) {
+  const token = localStorage.getItem('auth-token')
+  const response = await fetch(`${API_BASE_URL}/estimates/get-all/${adminId}?limit=${limit}`, { headers: { Accept: 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) } })
+  if (!response.ok) throw new Error(`Estimates API request failed: ${response.status}`)
   return response.json()
 }
