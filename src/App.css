@@ -1540,3 +1540,4 @@ td strong {
   .sidebar.open .brand{justify-content:flex-start}
   .sidebar.open .brand .sidebar-close{margin-left:auto}
 }
+.login-error{margin:0;color:#d64545;background:#fff0f0;border:1px solid #ffd2d2;border-radius:7px;padding:9px 11px;font-size:11px}
