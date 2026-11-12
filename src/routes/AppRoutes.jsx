@@ -3,12 +3,14 @@ import AdminLayout from "../layouts/AdminLayout";
 import Dashboard from "../pages/Dashboard";
 import PlaceholderPage from "../pages/PlaceholderPage";
 const pages = [
-  "bookings",
-  "cleaners",
-  "customers",
-  "payments",
-  "reports",
-  "settings",
+  ["jobSchedulingManagement", "Job Management"],
+  ["vehicleGpsTrack", "GPS Tracking"],
+  ["employeeManagement", "Employee Management"],
+  ["crm", "CRM"],
+  ["manageInventory", "Manage Company Inventory"],
+  ["troubleshootingDashboard", "Troubleshooting"],
+  ["manageNotices", "Manage Notices"],
+  ["manageVendors", "Vendor Management"],
 ];
 export default function AppRoutes({ onLogout }) {
   return (
@@ -16,13 +18,11 @@ export default function AppRoutes({ onLogout }) {
       <Route element={<AdminLayout onLogout={onLogout} />}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
-        {pages.map((page) => (
+        {pages.map(([path, name]) => (
           <Route
-            key={page}
-            path={page}
-            element={
-              <PlaceholderPage name={page[0].toUpperCase() + page.slice(1)} />
-            }
+            key={path}
+            path={path}
+            element={<PlaceholderPage name={name} />}
           />
         ))}
       </Route>

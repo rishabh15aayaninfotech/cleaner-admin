@@ -4,11 +4,14 @@ import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 const titles = {
   dashboard: "Dashboard",
-  bookings: "Bookings",
-  cleaners: "Cleaners",
-  customers: "Customers",
-  payments: "Payments",
-  reports: "Reports",
+  jobSchedulingManagement: "Job Management",
+  vehicleGpsTrack: "GPS Tracking",
+  employeeManagement: "Employee Management",
+  crm: "CRM",
+  manageInventory: "Manage Company Inventory",
+  troubleshootingDashboard: "Troubleshooting",
+  manageNotices: "Manage Notices",
+  manageVendors: "Vendor Management",
   settings: "Settings",
 };
 export default function AdminLayout({ onLogout }) {
