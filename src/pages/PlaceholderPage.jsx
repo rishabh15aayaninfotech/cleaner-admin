@@ -1,0 +1,2 @@
+import Icon from '../components/Icon'
+export default function PlaceholderPage({name}){return <div className="placeholder panel"><div className="empty-icon"><Icon name="settings"/></div><h1>{name}</h1><p className="muted">This workspace is ready for your {name.toLowerCase()} management tools.</p><button className="btn btn-primary">＋ Add {name==='Settings'?'configuration':name.slice(0,-1)}</button></div>}

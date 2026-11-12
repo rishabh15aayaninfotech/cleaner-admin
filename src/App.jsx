@@ -1,33 +1,29 @@
-import { useEffect, useState } from 'react'
-import { BrowserRouter, Navigate, NavLink, Outlet, Route, Routes, useLocation } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import './App.css'
-import cleanerLogo from './assets/cleaner-logo.png'
-
-const items=[['Dashboard','grid','/dashboard'],['Bookings','calendar','/bookings'],['Cleaners','users','/cleaners'],['Customers','user','/customers'],['Payments','card','/payments'],['Reports','chart','/reports']]
-function Icon({name}){const icons={grid:'bi-grid',calendar:'bi-calendar3',users:'bi-people',user:'bi-person',card:'bi-credit-card',chart:'bi-bar-chart',settings:'bi-gear',logout:'bi-box-arrow-right',sun:'bi-sun',moon:'bi-moon'};return <i className={`bi ${icons[name]||icons.grid}`} aria-hidden="true"/>}
-function Login({onLogin}){const [email,setEmail]=useState('admin@cleana.co'),[password,setPassword]=useState('password');return <main className="login-page"><section className="login-card"><div className="brand brand-large"><img className="brand-logo" src={cleanerLogo} alt="Cleaner logo"/><span>Cleaner</span></div><div className="login-copy"><p className="eyebrow">WELCOME BACK</p><h1>Good to see you again.</h1><p>A platform to manage your employees, events, inventory, and daily business activities efficiently.</p></div><form className="login-form" onSubmit={e=>{e.preventDefault();if(email&&password)onLogin()}}><label>Email address<input type="email" value={email} onChange={e=>setEmail(e.target.value)} required/></label><label>Password<input type="password" value={password} onChange={e=>setPassword(e.target.value)} required/></label><div className="login-options"><label className="check"><input type="checkbox" defaultChecked/> Remember me</label></div><button className="btn btn-primary w-100">Sign in <span>→</span></button></form></section><aside className="login-aside hero-image-panel"><div className="hero-image-overlay"/><div className="hero-image-copy"><span className="eyebrow">RUN YOUR BUSINESS BETTER</span><h2>Everything your team needs, in one place.</h2><p>Manage people, schedules, inventory, and everyday operations with confidence.</p><div className="hero-proof"><span className="hero-proof-dot">✓</span><span><strong>Simple. Organized. Efficient.</strong><small>Built for busy teams</small></span></div></div></aside></main>}
-function Layout({logout}){const [open,setOpen]=useState(false),[collapsed,setCollapsed]=useState(false),[dark,setDark]=useState(()=>localStorage.getItem('cleaner-theme')==='dark'),loc=useLocation(),title=items.find(x=>x[2]===loc.pathname)?.[0]||'Settings';useEffect(()=>{document.documentElement.dataset.theme=dark?'dark':'light';localStorage.setItem('cleaner-theme',dark?'dark':'light')},[dark]);return <div className="app-shell"><aside className={'sidebar '+(open?'open ':'')+(collapsed?'collapsed':'')}><div className="brand"><img className="brand-logo" src={cleanerLogo} alt="Cleaner logo"/><span>Cleaner</span></div><p className="nav-label">MAIN MENU</p><nav>{items.map(([l,i,p])=><NavLink key={p} to={p} onClick={()=>setOpen(false)} className={({isActive})=>isActive?'active':''}><Icon name={i}/>{l}</NavLink>)}</nav><p className="nav-label workspace-label">WORKSPACE</p><nav><NavLink to="/settings" className={({isActive})=>isActive?'active':''}><Icon name="settings"/>Settings</NavLink></nav><div className="sidebar-bottom"><button className="profile-mini" onClick={logout}><span className="avatar">AR</span><span><strong>Alex Rivera</strong><small>Administrator</small></span><Icon name="logout"/></button></div></aside><div className="main-area"><header className="topbar"><button className="mobile-menu collapse-toggle" onClick={()=>{setOpen(!open);setCollapsed(!collapsed)}}>☰</button><div className="breadcrumb"><span>Workspace</span><b>/</b><strong>{title}</strong></div><div className="top-actions"><button className="icon-btn theme-toggle" aria-label="Toggle theme" onClick={()=>setDark(!dark)}><Icon name={dark?'sun':'moon'}/></button><div className="top-profile"><span className="avatar">AR</span><span><strong>Alex Rivera</strong><small>Admin</small></span></div></div></header><main className="content"><Outlet/></main></div></div>}
-const stats=[['Total bookings','1,248','calendar'],['Active cleaners','86','users'],['Total customers','2,402','user'],['Revenue this month','$28,460','card']];const rows=[['BK-1048','Sarah Mitchell','Deep cleaning','Today, 10:00 AM','$120.00','Confirmed'],['BK-1047','Michael Chen','Regular cleaning','Today, 1:30 PM','$85.00','In progress'],['BK-1046','Emma Williams','Move-out cleaning','Tomorrow, 9:00 AM','$210.00','Pending'],['BK-1045','James Wilson','Regular cleaning','Tomorrow, 2:00 PM','$95.00','Confirmed']]
-function Dashboard(){return <><div className="page-heading"><div><p className="eyebrow">WEDNESDAY, NOVEMBER 12, 2026</p><h1>Good morning, Alex 👋</h1><p className="muted">Here’s what’s happening with your business today.</p></div><button className="btn btn-primary">＋ New booking</button></div><div className="stats-grid">{stats.map(([l,v,i])=><div className="stat-card" key={l}><div className="stat-top"><span>{l}</span><span className="stat-icon"><Icon name={i}/></span></div><strong>{v}</strong><div className="stat-foot"><span className="up">↗ +12.8%</span><small>vs last month</small></div></div>)}</div><div className="dashboard-grid"><section className="panel chart-panel"><div className="panel-heading"><div><h2>Booking overview</h2><p className="muted">Your bookings over the last 7 days</p></div><button className="select-btn">This week⌄</button></div><div className="chart"><div className="chart-y"><span>80</span><span>60</span><span>40</span><span>20</span><span>0</span></div><div className="chart-area"><div className="grid-lines"><i/><i/><i/><i/><i/></div><svg viewBox="0 0 600 210" preserveAspectRatio="none" className="line-chart"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#3b82f6" stopOpacity=".2"/><stop offset="1" stopColor="#3b82f6" stopOpacity="0"/></linearGradient></defs><path d="M0 160C45 135 55 145 100 125S145 155 200 120S255 108 300 140S355 90 400 110S450 50 500 78S550 42 600 56V210H0Z" fill="url(#fill)"/><path d="M0 160C45 135 55 145 100 125S145 155 200 120S255 108 300 140S355 90 400 110S450 50 500 78S550 42 600 56" fill="none" stroke="#3b82f6" strokeWidth="3"/></svg><div className="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div></div></div></section><section className="panel activity-panel"><div className="panel-heading"><div><h2>Today’s schedule</h2><p className="muted">5 bookings scheduled</p></div><a href="/bookings">View all</a></div><div className="schedule-list">{[['10:00','Sarah Mitchell','Deep cleaning · Downtown','$120','blue'],['1:30','Michael Chen','Regular cleaning · Westside','$85','orange'],['4:00','Olivia Parker','Office cleaning · Midtown','$160','purple']].map(x=><div key={x[1]}><span className="time">{x[0]}</span><span className={`timeline-dot ${x[4]}`}/><span><strong>{x[1]}</strong><small>{x[2]}</small></span><b>{x[3]}</b></div>)}</div></section></div><section className="panel table-panel"><div className="panel-heading"><div><h2>Recent bookings</h2><p className="muted">Keep an eye on your latest bookings</p></div><a href="/bookings">View all bookings →</a></div><div className="table-responsive"><table><thead><tr><th>BOOKING ID</th><th>CUSTOMER</th><th>SERVICE</th><th>DATE & TIME</th><th>AMOUNT</th><th>STATUS</th></tr></thead><tbody>{rows.map(r=><tr key={r[0]}>{r.slice(0,5).map((x,i)=><td key={i}>{i===0?<strong>{x}</strong>:x}</td>)}<td><span className={`status ${r[5].replace(' ','-').toLowerCase()}`}>{r[5]}</span></td></tr>)}</tbody></table></div></section></>}
-function Placeholder({name}){return <div className="placeholder panel"><div className="empty-icon"><Icon name={items.find(x=>x[0]===name)?.[1]||'settings'}/></div><h1>{name}</h1><p className="muted">This workspace is ready for your {name.toLowerCase()} management tools.</p><button className="btn btn-primary">＋ Add {name==='Settings'?'configuration':name.slice(0,-1)}</button></div>}
-function App(){const [auth,setAuth]=useState(()=>localStorage.getItem('cleana-auth')==='true'),login=()=>{localStorage.setItem('cleana-auth','true');setAuth(true)},logout=()=>{localStorage.removeItem('cleana-auth');setAuth(false)};return <BrowserRouter>{!auth?<Login onLogin={login}/>:<Routes><Route element={<Layout logout={logout}/>}><Route index element={<Navigate to="/dashboard" replace/>}/><Route path="/dashboard" element={<Dashboard/>}/>{['bookings','cleaners','customers','payments','reports','settings'].map(x=><Route key={x} path={`/${x}`} element={<Placeholder name={x[0].toUpperCase()+x.slice(1)}/>}/>)}</Route></Routes>}</BrowserRouter>}
-export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "./App.css";
+import LoginPage from "./pages/LoginPage";
+import AppRoutes from "./routes/AppRoutes";
+export default function App() {
+  const [authenticated, setAuthenticated] = useState(
+    () => localStorage.getItem("cleaner-auth") === "true",
+  );
+  const login = () => {
+    localStorage.setItem("cleaner-auth", "true");
+    setAuthenticated(true);
+  };
+  const logout = () => {
+    localStorage.removeItem("cleaner-auth");
+    setAuthenticated(false);
+  };
+  return (
+    <BrowserRouter>
+      {authenticated ? (
+        <AppRoutes onLogout={logout} />
+      ) : (
+        <LoginPage onLogin={login} />
+      )}
+    </BrowserRouter>
+  );
+}
