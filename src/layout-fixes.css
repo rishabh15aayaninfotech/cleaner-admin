@@ -1,6 +1,6 @@
 /* Keep the fixed topbar from covering the dashboard content. */
 .topbar{position:fixed;left:210px;right:0;top:0;height:62px;margin:0;z-index:10;border-radius:0}
-.content{padding:94px 30px 50px}
+.content{padding:94px 14px 50px}
 .calendar-card{display:block}
 .reference-sections > .calendar-card:not(.google-calendar){display:none}
 .reference-table tbody tr:nth-child(n+6){display:none}
