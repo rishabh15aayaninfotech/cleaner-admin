@@ -23,3 +23,7 @@ export async function getEstimates(adminId, limit = 5) {
   if (!response.ok) throw new Error(`Estimates API request failed: ${response.status}`)
   return response.json()
 }
+
+export async function getAllJobIds(adminId) {
+  return apiRequest(`/event/get-all-jobIds/${adminId}`)
+}
