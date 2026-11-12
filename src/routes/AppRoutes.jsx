@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import Dashboard from "../pages/Dashboard";
 import PlaceholderPage from "../pages/PlaceholderPage";
+import ProfilePage from "../pages/ProfilePage";
 const pages = [
   ["jobSchedulingManagement", "Job Management"],
   ["vehicleGpsTrack", "GPS Tracking"],
@@ -18,6 +19,7 @@ export default function AppRoutes({ onLogout }) {
       <Route element={<AdminLayout onLogout={onLogout} />}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="profile" element={<ProfilePage />} />
         {pages.map(([path, name]) => (
           <Route
             key={path}

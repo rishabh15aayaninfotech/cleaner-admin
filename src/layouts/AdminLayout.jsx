@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
+import { getAdminProfile } from "../lib/api";
 const titles = {
   dashboard: "Dashboard",
   jobSchedulingManagement: "Job Management",
@@ -21,12 +22,10 @@ export default function AdminLayout({ onLogout }) {
       () => localStorage.getItem("theme") === "dark",
     ),
     location = useLocation();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  user.initials = (user.name || "Admin").split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
-  user.role = typeof user.role === "object" ? user.role.role : user.role;
-  user.imageUrl = user.profilePicture?.[0]?.filename
-    ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, "")}/${user.profilePicture[0].filename}`
-    : "";
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  useEffect(() => { if (user._id) getAdminProfile(user._id).then((result) => { if (result?.data) { const safeUser = { ...result.data }; delete safeUser.password; localStorage.setItem("user", JSON.stringify(safeUser)); setUser(safeUser); } }).catch(() => {}); }, [user._id]);
+  const readableRole = typeof user.role === "object" ? user.role.role : /^[a-f\d]{24}$/i.test(user.role || "") ? "Admin" : user.role;
+  const displayUser = { ...user, initials: (user.name || "Admin").split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase(), role: readableRole, imageUrl: user.profilePicture?.[0]?.url || (user.profilePicture?.[0]?.filename ? `${import.meta.env.VITE_API_BASE_URL.replace(/\/api\/?$/, "")}/${user.profilePicture[0].filename}` : "") };
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
       localStorage.setItem("theme", dark ? "dark" : "light");
@@ -39,7 +38,7 @@ export default function AdminLayout({ onLogout }) {
         collapsed={collapsed}
         onClose={() => setOpen(false)}
         onLogout={onLogout}
-        user={user}
+        user={displayUser}
       />
       <div className="main-area">
         <Topbar
@@ -50,7 +49,7 @@ export default function AdminLayout({ onLogout }) {
           dark={dark}
           onTheme={() => setDark(!dark)}
           title={title}
-          user={user}
+          user={displayUser}
         />
         <main className="content">
           <Outlet />
