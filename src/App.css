@@ -20,6 +20,7 @@
 [data-theme='dark'] .mobile-menu:hover,[data-theme='dark'] .theme-toggle:hover{background:#203746}
 .topbar{box-sizing:border-box}.top-profile{border:1px solid var(--border);border-radius:11px;background:var(--surface);padding:5px 9px 5px 6px;min-height:42px;transition:border-color .2s,box-shadow .2s}.top-profile:hover{border-color:#b9cedb;box-shadow:0 4px 12px rgba(15,55,80,.08)}.top-profile .avatar{box-shadow:inset 0 0 0 1px #c5e4f1}.top-profile span:nth-child(2){padding:0 3px}.top-profile strong{font-size:11px;color:var(--ink)}.top-profile small{font-size:9px;color:var(--muted);margin-top:3px}.top-profile .chevron{font-size:10px;color:#75889a}.profile-dropdown{top:50px;border-radius:10px;padding:5px 0 7px}.profile-dropdown p{font-size:10px;letter-spacing:.3px;padding:8px 14px}.profile-dropdown button{font-size:12px;padding:9px 14px}.profile-dropdown button i{font-size:13px}
 .sidebar nav a{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-close{display:none;border:0;background:transparent;color:#6f8092;font-size:16px;width:32px;height:32px;border-radius:8px;place-items:center}.sidebar-close:hover{background:#eef5f8;color:#0b6da8}
 .breadcrumb{margin-bottom:0}
 h1,
 h2,
@@ -1524,4 +1525,18 @@ td strong {
   .sidebar.collapsed ~ .main-area .content {
     padding-left: 16px;
   }
+}
+@media (max-width: 700px) {
+  .app-shell,.main-area{width:100%;min-width:0}
+  .topbar{left:0!important;right:0;width:100%;padding:0 16px}
+  .content{width:100%;padding-left:16px!important;padding-right:16px!important;overflow-x:hidden}
+  .breadcrumb{font-size:12px;overflow:hidden;text-overflow:ellipsis}
+  .breadcrumb span,.breadcrumb b{display:none}
+  .top-actions{gap:7px}
+  .top-profile{padding-left:8px;border-left:0}
+  .top-profile span:nth-child(2){display:none}
+  .top-profile .chevron{display:none}
+  .sidebar.open .sidebar-close{display:grid}
+  .sidebar.open .brand{justify-content:flex-start}
+  .sidebar.open .brand .sidebar-close{margin-left:auto}
 }
