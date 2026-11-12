@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
+import "./layout-fixes.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {

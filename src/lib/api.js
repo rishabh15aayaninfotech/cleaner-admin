@@ -9,3 +9,10 @@ export { API_BASE_URL, refreshAccessToken }
 export function getAdminProfile(adminId) {
   return apiRequest(`/auth/get-admin/${adminId}`)
 }
+
+export async function getEmployees(adminId, page = 1, limit = 5) {
+  const token = localStorage.getItem('auth-token')
+  const response = await fetch(`${API_BASE_URL}/employee/get-all-employees/${adminId}?page=${page}&limit=${limit}`, { headers: { Accept: 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) } })
+  if (!response.ok) throw new Error(`Employee API request failed: ${response.status}`)
+  return response.json()
+}
