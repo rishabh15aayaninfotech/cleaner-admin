@@ -16,13 +16,13 @@ export async function getEmployees(adminId, page = 1, limit = 5) {
   const response = await fetch(`${EMPLOYEE_SERVICE_URL}/employee/getAllEmployees/${adminId}?page=${page}&limit=${limit}`, { headers: { Accept: 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) } })
   if (!response.ok) throw new Error(`Employee API request failed: ${response.status}`)
   const result = await response.json()
-  ;(result?.data||[]).forEach(employee=>sessionStorage.setItem(`employee:${employee._id}`,JSON.stringify(employee)))
+  ;(result?.data||[]).forEach(employee=>sessionStorage.setItem(`employee:${employee._id}`,JSON.stringify(employee)));sessionStorage.setItem('employee-total',String(result?.pagination?.totalEmployees||result?.pagination?.total||result?.data?.length||0))
   return result
 }
 
 export async function getAllEmployees(adminId, page = 1, limit = 10) {
   const result = await apiRequest(`/employee/getAllEmployees/${adminId}?page=${page}&limit=${limit}`)
-  ;(result?.data||[]).forEach(employee=>sessionStorage.setItem(`employee:${employee._id}`,JSON.stringify(employee)))
+  ;(result?.data||[]).forEach(employee=>sessionStorage.setItem(`employee:${employee._id}`,JSON.stringify(employee)));sessionStorage.setItem('employee-total',String(result?.pagination?.total||result?.pagination?.totalEmployees||result?.data?.length||0))
   return result
 }
 

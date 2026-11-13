@@ -9,6 +9,12 @@ import "./detail-fixes.css";
 import "./detail-back.css";
 import "./events-page.css";
 import "./event-title.css";
+import "./job-management.css";
+import "./employee-actions.css";
+import "./employee-filters.css";
+import "./employee-filter-layout.css";
+import "./employee-button-polish.css";
+import "./employee-banner.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {
