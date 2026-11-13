@@ -3,6 +3,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import Dashboard from "../pages/Dashboard";
 import PlaceholderPage from "../pages/PlaceholderPage";
 import ProfilePage from "../pages/ProfilePage";
+import EventDetailsPage from "../pages/EventDetailsPage";
 const pages = [
   ["jobSchedulingManagement", "Job Management"],
   ["vehicleGpsTrack", "GPS Tracking"],
@@ -20,6 +21,7 @@ export default function AppRoutes({ onLogout }) {
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="event-details/:id" element={<EventDetailsPage />} />
         {pages.map(([path, name]) => (
           <Route
             key={path}

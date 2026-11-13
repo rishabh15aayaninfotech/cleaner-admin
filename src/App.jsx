@@ -5,6 +5,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import "./layout-fixes.css";
 import "./calendar-fixes.css";
+import "./detail-fixes.css";
+import "./detail-back.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {
