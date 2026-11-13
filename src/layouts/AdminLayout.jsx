@@ -32,7 +32,7 @@ export default function AdminLayout({ onLogout }) {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
       localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
-  useEffect(() => { if (location.pathname === "/events") { const timer = window.setTimeout(() => { const button = document.querySelector(".events-back-button"); if (button) button.onclick = () => { window.close(); window.setTimeout(() => window.location.assign("/dashboard"), 100); }; }, 0); return () => window.clearTimeout(timer); } }, [location.pathname]);
+  useEffect(() => { if (location.pathname === "/events" || location.pathname === "/dashboard") { const timer = window.setInterval(() => { const button = document.querySelector(".events-back-button"); if (button) button.onclick = () => { window.close(); window.setTimeout(() => window.location.assign("/dashboard"), 100); }; document.querySelectorAll(".reference-table tbody tr").forEach(row => { const title = row.querySelector("td:nth-child(2)"); const view = row.querySelector(".row-view-action"); if (title && view && !title.dataset.linked) { title.dataset.linked = "true"; title.classList.add("event-title-link"); title.onclick = () => view.click(); } }); }, 100); return () => window.clearInterval(timer); } }, [location.pathname]);
   const title = titles[location.pathname.slice(1)] || "Dashboard";
   useEffect(() => {
     setLoading(true);

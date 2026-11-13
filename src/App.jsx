@@ -8,6 +8,7 @@ import "./calendar-fixes.css";
 import "./detail-fixes.css";
 import "./detail-back.css";
 import "./events-page.css";
+import "./event-title.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {
