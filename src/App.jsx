@@ -21,6 +21,7 @@ import "./dashboard-compact.css";
 import "./notices-page.css";
 import "./notices-ui.css";
 import "./vendors-page.css";
+import "./employee-api-filters.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {

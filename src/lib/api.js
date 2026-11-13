@@ -20,8 +20,12 @@ export async function getEmployees(adminId, page = 1, limit = 5) {
   return result
 }
 
-export async function getAllEmployees(adminId, page = 1, limit = 10) {
-  const result = await apiRequest(`/employee/getAllEmployees/${adminId}?page=${page}&limit=${limit}`)
+export async function getAllEmployees(adminId, page = 1, limit = 10, filters = {}) {
+  const query = new URLSearchParams({ page: String(page), limit: String(limit) })
+  if (filters.search) query.set('search', filters.search)
+  if (filters.workingStatus && filters.workingStatus !== 'All') query.set('workingStatus', filters.workingStatus)
+  if (filters.employeeStatus && filters.employeeStatus !== 'All') query.set('employeeStatus', filters.employeeStatus)
+  const result = await apiRequest(`/employee/getAllEmployees/${adminId}?${query.toString()}`)
   ;(result?.data||[]).forEach(employee=>sessionStorage.setItem(`employee:${employee._id}`,JSON.stringify(employee)));sessionStorage.setItem('employee-total',String(result?.pagination?.total||result?.pagination?.totalEmployees||result?.data?.length||0))
   return result
 }
