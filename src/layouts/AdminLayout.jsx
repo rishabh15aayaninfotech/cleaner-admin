@@ -32,6 +32,7 @@ export default function AdminLayout({ onLogout }) {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
       localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
+  useEffect(() => { if (location.pathname === "/events") { const timer = window.setTimeout(() => { const button = document.querySelector(".events-back-button"); if (button) button.onclick = () => { window.close(); window.setTimeout(() => window.location.assign("/dashboard"), 100); }; }, 0); return () => window.clearTimeout(timer); } }, [location.pathname]);
   const title = titles[location.pathname.slice(1)] || "Dashboard";
   useEffect(() => {
     setLoading(true);

@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import PlaceholderPage from "../pages/PlaceholderPage";
 import ProfilePage from "../pages/ProfilePage";
 import EventDetailsPage from "../pages/EventDetailsPage";
+import EventsListPage from "../pages/EventsListPage";
 const pages = [
   ["jobSchedulingManagement", "Job Management"],
   ["vehicleGpsTrack", "GPS Tracking"],
@@ -22,6 +23,7 @@ export default function AppRoutes({ onLogout }) {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="event-details/:id" element={<EventDetailsPage />} />
+        <Route path="events" element={<EventsListPage />} />
         {pages.map(([path, name]) => (
           <Route
             key={path}
