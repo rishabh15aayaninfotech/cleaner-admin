@@ -1,2 +1,29 @@
 .dashboard-welcome{padding:17px 22px}
 @media(max-width:600px){.dashboard-welcome{padding:18px}}
+
+.dashboard-stats{gap:12px;margin-top:2px}
+.dashboard-stat{position:relative;overflow:hidden;min-height:84px;padding:14px 15px;border:1px solid #e1e9f2;border-radius:14px;box-shadow:0 6px 18px #1d47700d;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.dashboard-stat:after{content:"";position:absolute;width:86px;height:86px;border-radius:50%;right:-38px;bottom:-45px;background:currentColor;opacity:.035;pointer-events:none}
+.dashboard-stat:hover{transform:translateY(-3px);box-shadow:0 12px 24px #1d477018;border-color:#b9d4e7}
+.dashboard-stat .stat-icon-wrap{width:38px;height:38px;flex:0 0 38px;border-radius:12px;box-shadow:inset 0 0 0 1px #ffffff80}
+.dashboard-stat p{font-size:10px;letter-spacing:.15px;margin-bottom:4px}
+.dashboard-stat strong{font-size:23px;letter-spacing:-.7px}
+.dashboard-stat small{font-size:9px;margin-top:5px;white-space:nowrap}
+.dashboard-stat small i{font-size:8px;margin-right:2px}
+.dashboard-stat.blue{color:#1686d9}.dashboard-stat.orange{color:#ec841d}.dashboard-stat.purple{color:#8666d8}.dashboard-stat.green{color:#20a46b}
+.dashboard-stat.blue strong{color:#126eb3}.dashboard-stat.orange strong{color:#c96d13}.dashboard-stat.purple strong{color:#6e50bd}.dashboard-stat.green strong{color:#16864f}
+@media(max-width:600px){.dashboard-stats{gap:9px}.dashboard-stat{min-height:78px;padding:12px 10px}.dashboard-stat .stat-icon-wrap{width:34px;height:34px;flex-basis:34px}.dashboard-stat strong{font-size:20px}.dashboard-stat small{font-size:8px}}
+
+[data-theme='dark'] .dashboard-stat,[data-theme='dark'] .dashboard-chart,[data-theme='dark'] .dashboard-progress,[data-theme='dark'] .quick-action-grid button{background:#16283d;border-color:#29445e;box-shadow:0 8px 20px #020c1830}
+[data-theme='dark'] .dashboard-stat:hover,[data-theme='dark'] .quick-action-grid button:hover{border-color:#3f7197;box-shadow:0 12px 25px #020c1848}
+[data-theme='dark'] .dashboard-stat p,[data-theme='dark'] .dashboard-card-heading .eyebrow,[data-theme='dark'] .quick-actions>.eyebrow{color:#8eabc4}
+[data-theme='dark'] .dashboard-stat strong,[data-theme='dark'] .dashboard-card-heading h2,[data-theme='dark'] .chart-summary strong,[data-theme='dark'] .availability-ring strong{color:#e8f3fb}
+[data-theme='dark'] .dashboard-stat small,[data-theme='dark'] .chart-summary span,[data-theme='dark'] .chart-days,[data-theme='dark'] .availability-legend span{color:#91a8ba}
+[data-theme='dark'] .dashboard-card-heading select{background:#203850;border-color:#3a5870;color:#c8d9e6}
+[data-theme='dark'] .availability-ring:after{background:#16283d}
+[data-theme='dark'] .availability-ring span{color:#91a8ba}
+[data-theme='dark'] .quick-action-grid strong{color:#e2eef7}
+[data-theme='dark'] .quick-action-grid small{color:#91a8ba}
+[data-theme='dark'] .quick-action-grid button>i:last-child{color:#7894ab}
+[data-theme='dark'] .text-action{color:#50b5f3}
+[data-theme='dark'] .sparkline-line{stroke:#25a5f2}
