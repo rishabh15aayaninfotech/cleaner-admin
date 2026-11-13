@@ -1,4 +1,6 @@
 .dashboard-welcome{padding:17px 22px}
+.topbar{height:50px;margin-top:0}
+.content{padding-top:68px}
 @media(max-width:600px){.dashboard-welcome{padding:18px}}
 
 .dashboard-stats{gap:12px;margin-top:2px}
