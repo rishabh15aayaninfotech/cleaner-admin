@@ -8,6 +8,7 @@ import EventsListPage from "../pages/EventsListPage";
 import EmployeesListPage from "../pages/EmployeesListPage";
 import EmployeeDetailsPage from "../pages/EmployeeDetailsPage";
 import JobManagementPage from "../pages/JobManagementPage";
+import NoticesPage from "../pages/NoticesPage";
 const pages = [
   ["jobSchedulingManagement", "Job Management"],
   ["vehicleGpsTrack", "GPS Tracking"],
@@ -29,7 +30,7 @@ export default function AppRoutes({ onLogout }) {
         <Route path="events" element={<EventsListPage />} />
         <Route path="employees" element={<EmployeesListPage />} />
         <Route path="employee-details/:id" element={<EmployeeDetailsPage />} />
-        {pages.filter(([path]) => path !== "employeeManagement" && path !== "jobSchedulingManagement").map(([path, name]) => (
+        {pages.filter(([path]) => path !== "employeeManagement" && path !== "jobSchedulingManagement" && path !== "manageNotices").map(([path, name]) => (
           <Route
             key={path}
             path={path}
@@ -38,6 +39,7 @@ export default function AppRoutes({ onLogout }) {
         ))}
         <Route path="employeeManagement" element={<EmployeesListPage />} />
         <Route path="jobSchedulingManagement" element={<JobManagementPage />} />
+        <Route path="manageNotices" element={<NoticesPage />} />
       </Route>
     </Routes>
   );

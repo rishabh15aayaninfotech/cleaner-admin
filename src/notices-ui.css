@@ -1,0 +1,9 @@
+.notices-page{gap:16px}.notices-page .list-page-heading{display:flex;align-items:flex-end;justify-content:space-between;padding:16px 20px;border-radius:16px;background:linear-gradient(120deg,#102b5b 0%,#24348b 58%,#5b32c8 100%);box-shadow:0 10px 24px #173f8428}.notices-page .list-page-heading h1{color:#fff}.notices-page .list-page-heading p:not(.eyebrow),.notices-page .list-page-heading .eyebrow{color:#c8d6ff}
+[data-theme='dark'] .notices-page .reference-table-card{background:#142236;border-color:#30445e}
+.notices-page .list-page-heading>.small-action{display:none}
+.notices-page .list-page-heading:after{content:'Total notices';font:700 11px Manrope;color:#d8e5ff;margin-left:auto;padding:9px 13px;border:1px solid #ffffff45;border-radius:8px;background:#ffffff14}
+.notices-page .list-page-heading:after{display:none}
+.notice-total{color:#d8e5ff;font:700 11px Manrope;padding:9px 13px;border:1px solid #ffffff45;border-radius:8px;background:#ffffff14}
+.notices-page .notices-table tbody tr:nth-child(n+6){display:table-row!important}
+.notices-page .list-page-heading{position:relative;overflow:hidden;min-height:88px;padding:16px 20px}.notices-page .list-page-heading:before{content:'';position:absolute;width:260px;height:260px;right:70px;top:-145px;border:1px solid #ffffff22;border-radius:50%;box-shadow:0 0 0 28px #ffffff09,0 0 0 58px #ffffff06}.notices-page .list-page-heading>div,.notices-page .notice-total{position:relative;z-index:1}.notices-page .notice-total{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:105px;padding:8px 14px;border:1px solid #ffffff42;border-radius:12px;background:#ffffff18;color:#fff;font:800 24px Manrope}.notices-page .notice-total:after{content:'TOTAL NOTICES';display:block;font-size:9px;letter-spacing:.5px;color:#d5ddff;margin-top:3px}
+.notices-page .notice-total:after{display:none!important}

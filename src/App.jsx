@@ -10,6 +10,7 @@ import "./detail-back.css";
 import "./events-page.css";
 import "./event-title.css";
 import "./job-management.css";
+import "./job-management-overrides.css";
 import "./employee-actions.css";
 import "./employee-filters.css";
 import "./employee-filter-layout.css";
@@ -17,6 +18,8 @@ import "./employee-button-polish.css";
 import "./employee-banner.css";
 import "./dashboard.css";
 import "./dashboard-compact.css";
+import "./notices-page.css";
+import "./notices-ui.css";
 import LoginPage from "./pages/LoginPage";
 import AppRoutes from "./routes/AppRoutes";
 export default function App() {
