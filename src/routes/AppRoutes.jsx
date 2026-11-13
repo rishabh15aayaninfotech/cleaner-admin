@@ -28,13 +28,14 @@ export default function AppRoutes({ onLogout }) {
         <Route path="events" element={<EventsListPage />} />
         <Route path="employees" element={<EmployeesListPage />} />
         <Route path="employee-details/:id" element={<EmployeeDetailsPage />} />
-        {pages.map(([path, name]) => (
+        {pages.filter(([path]) => path !== "employeeManagement").map(([path, name]) => (
           <Route
             key={path}
             path={path}
             element={<PlaceholderPage name={name} />}
           />
         ))}
+        <Route path="employeeManagement" element={<EmployeesListPage />} />
       </Route>
     </Routes>
   );
